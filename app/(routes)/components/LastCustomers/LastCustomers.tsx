@@ -2,8 +2,8 @@
 
 import CustomIcon from "@/components/CustomIcon/CustomIcon";
 import { Building } from "lucide-react";
-import { CustomerTable } from "../CustomerTable/CustomerTable";
-import { columns, Payment } from "./columns";
+import { CustomerTable } from "../LastCustomers/CustomerTable";
+import { columns, Payment } from "./Columns";
 
 const data: Payment[] = [
   { id: "728ed52f", amount: 100, status: "pending", email: "m@example.com" },
