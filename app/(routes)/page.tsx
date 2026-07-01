@@ -1,7 +1,7 @@
 import CardSummary from "./components/CardSummary/CardSummary";
 import { BookOpen, BookOpenCheck, UserRound, Waypoints } from "lucide-react";
 import LastCustomers from "./components/LastCustomers/LastCustomers";
-import SalesDistributors from "./components/SalesDistributors/SalesDistributors";
+import SalesDistributors from "./components/SalesDistributors/Salesdistributors";
 import TotalSuscribers from "./components/TotalSuscribers/TotalSuscribers";
 import ListIntegrations from "./components/ListIntegrations/ListIntegrations";
 
