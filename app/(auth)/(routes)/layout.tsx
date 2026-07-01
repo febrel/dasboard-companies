@@ -1,3 +1,5 @@
+import Logo from "@/components/Logo/Logo";
+
 export default function LayoutAuth({
   children,
 }: {
@@ -5,7 +7,7 @@ export default function LayoutAuth({
 }) {
   return (
     <div className="flex flex-col justify-center h-full items-center">
-      <p>Tarredev Dasboard</p>
+      <Logo />
       <h1 className="text-3xl my-2">Welcome to my Dasboard</h1>
       {children}
       <h2 className="text-2xl mb-3">TarreDasboard</h2>

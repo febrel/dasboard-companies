@@ -8,10 +8,16 @@ export default function Logo() {
 
   return (
     <div
-      className="min-h-20 h-20 flex items-center px-6 border-r cursor-pointer"
+      className="min-h-20 h-20 flex items-center px-6 border-b cursor-pointer"
       onClick={() => router.push("/")}
     >
-      <Image src="/logo.svg" alt="logo" width={30} height={30} priority />
+      <Image
+        src="/logo.svg"
+        alt="Logo"
+        width={40}
+        height={40}
+        style={{ height: "40px", width: "40px" }}
+      />
       <h1 className="font-bold text-xl p-2"> Manager</h1>
     </div>
   );
