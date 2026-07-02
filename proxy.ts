@@ -1,7 +1,11 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 // 1. Definimos qué rutas son públicas (no requieren inicio de sesión)
-const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)"]);
+const isPublicRoute = createRouteMatcher([
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/api/uploadthing(.*)", // Agregamos esto para darle vía libre a los callbacks de UploadThing
+]);
 
 export default clerkMiddleware(async (auth, req) => {
   // 2. Si la ruta NO es pública, obligamos a que se autentique

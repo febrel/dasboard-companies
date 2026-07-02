@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_Display } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -23,7 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${noto.variable} h-full antialiased`} suppressHydrationWarning>
+      <html
+        lang="en"
+        className={`${noto.variable} h-full antialiased`}
+        suppressHydrationWarning
+      >
         <body className="min-h-full flex flex-col">
           <ThemeProvider
             attribute="class"
@@ -32,6 +37,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
