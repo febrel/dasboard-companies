@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "postgresql"
+  relationMode = "prisma"
+}
+
+model Company{
+  id String @id @default(uuid())
+  userId String
+  name String @db.Text
+  description String? @db.Text
+  porfileImage String @db.Text
+  cif String @db.Text
+  phone String @db.Text
+  country String @db.Text
+  wevside String @db.Text
+
+  contacts Contact[]
+  events Event[]
+
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+}
+
+model Contact{
+  id String @id @default(uuid())
+
+  companyId String? @db.Text
+  
+  name String @db.Text
+  role String @db.Text
+  email String @db.Text
+  phone String @db.Text
+
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  company Company? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  @@index([companyId])
+}
+
+model Event {
+  id String @id @default(uuid())
+  companyId String
+  title String
+  start DateTime
+  allDay Boolean
+  timeFormat String
+
+  company Company @relation(fields: [companyId], references: [id])
+
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  @@index([companyId])
+}
