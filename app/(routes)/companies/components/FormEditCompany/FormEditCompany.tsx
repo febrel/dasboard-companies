@@ -88,7 +88,7 @@ export default function FormEditCompany({ company }: { company: CompanyData }) {
             <img
               src={company.profileImage}
               alt={company.name}
-              className="size-20 rounded-full object-cover border"
+              className="size-25 rounded-full object-cover border p-2"
             />
             <div>
               <p className="text-lg font-medium">{company.name}</p>
@@ -214,12 +214,23 @@ export default function FormEditCompany({ company }: { company: CompanyData }) {
                     <UploadButton
                       className="rounded-lg bg-slate-600/20 text-slate-800 outline-dotted outline-3"
                       endpoint="profileImage"
-                      onClientUploadComplete={(res) => {
-                        form.setValue("profileImage", res?.[0].ufsUrl, {
+                      onClientUploadComplete={async (res) => {
+                        const newUrl = res?.[0].ufsUrl;
+                        form.setValue("profileImage", newUrl, {
                           shouldValidate: true,
                         });
                         toast("Photo uploaded!");
                         setPhotoUploaded(true);
+
+                        if (company.profileImage) {
+                          try {
+                            await axios.post("/api/uploadthing/delete", {
+                              fileUrl: company.profileImage,
+                            });
+                          } catch {
+                            console.log("Could not delete old image");
+                          }
+                        }
                       }}
                       onUploadError={(error: Error) => {
                         toast("Error uploading photo");
