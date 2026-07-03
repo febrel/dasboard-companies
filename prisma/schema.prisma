@@ -17,11 +17,11 @@ model Company{
   userId String
   name String @db.Text
   description String? @db.Text
-  porfileImage String @db.Text
+  profileImage String @db.Text
   cif String @db.Text
   phone String @db.Text
   country String @db.Text
-  wevside String @db.Text
+  website String @db.Text
 
   contacts Contact[]
   events Event[]

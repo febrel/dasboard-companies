@@ -6,6 +6,8 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
+import axios from "axios";
+
 import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldGroup } from "@/components/ui/field";
 import { FieldLabel } from "@/components/ui/field";
@@ -20,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { FormCreateCustomerProps } from "./FormCreateCustomers.types";
 import { useState } from "react";
 import { UploadButton } from "@/utils/uploadthing";
+import { useRouter } from "next/navigation";
 
 // 1. Añadir .min() a name y profileImage para que NO acepten strings vacíos
 const formSchema = z.object({
@@ -34,6 +37,7 @@ const formSchema = z.object({
 export default function FormCreateCustomers(props: FormCreateCustomerProps) {
   const { setOpenModalCreate } = props;
   const [photoUploades, setPhotoUploades] = useState(false);
+  const router = useRouter();
 
   // 2. Añadir mode: "onChange" para que isValid se calcule en tiempo real
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,7 +56,14 @@ export default function FormCreateCustomers(props: FormCreateCustomerProps) {
   const { isValid } = form.formState;
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+    try {
+      await axios.post("/api/company", data);
+      toast.success("Company created");
+      router.refresh();
+      setOpenModalCreate?.(false);
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   };
 
   return (
