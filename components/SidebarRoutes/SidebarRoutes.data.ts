@@ -20,7 +20,7 @@ export const dataGeneralSidebar = [
     label: "Companies",
     href: "/companies",
   },
-  { icon: Calendar, label: "Calendar", href: "/task" },
+  { icon: Calendar, label: "Calendar", href: "/tasks" },
 ];
 
 export const dataToolsSidebar = [

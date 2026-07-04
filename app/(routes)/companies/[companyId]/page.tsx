@@ -21,7 +21,7 @@ export default async function CompanyIdPage({
   if (!company) redirect("/companies");
 
   return (
-    <div className="p-6">
+    <div className="p-4">
       <FormEditCompany company={company} />
       <div className="flex justify-end mt-4">
         <ButtonDeleteCompany companyId={company.id} />
