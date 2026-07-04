@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { UploadButton } from "@/utils/uploadthing";
 import { Edit, Edit2, User2 } from "lucide-react";
 import NewContact from "../NewContact/NewContact";
+import ListContact from "../ListContact/ListContact";
 
 const formSchema = z.object({
   name: z.string().min(2, "Company name is required"),
@@ -45,6 +46,7 @@ type CompanyData = {
 export default function FormEditCompany({ company }: { company: CompanyData }) {
   const router = useRouter();
   const [photoUploaded, setPhotoUploaded] = React.useState(false);
+  const [contactAdded, setContactAdded] = React.useState(0);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -73,8 +75,8 @@ export default function FormEditCompany({ company }: { company: CompanyData }) {
   };
 
   return (
-    <div className="grid grid-cols-1 lg: grid-cols-2 lg:gap-x-10">
-      <div className="rounded-lg bg-background shadow-md hover:shadow-lg p-4">
+    <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-10">
+      <div className="rounded-lg bg-background shadow-md hover:shadow-lg p-4 mb-4">
         <div className="flex items-center gap-x-2">
           <Edit2 className="w-5 h-5" />
           Edit Company
@@ -267,9 +269,13 @@ export default function FormEditCompany({ company }: { company: CompanyData }) {
             Contacs
           </div>
           <div>
-            <NewContact />
+            <NewContact
+              companyId={company.id}
+              onContactAdded={() => setContactAdded((c) => c + 1)}
+            />
           </div>
         </div>
+        <ListContact company={company} refreshKey={contactAdded} />
       </div>
     </div>
   );

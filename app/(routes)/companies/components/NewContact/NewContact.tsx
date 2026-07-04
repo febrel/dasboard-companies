@@ -1,6 +1,7 @@
+"use client";
+
 import { useState } from "react";
 
-import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,8 +12,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { CirclePlus } from "lucide-react";
+import FormContact from "../FormContact/FormContact";
 
-export default function NewContact() {
+export default function NewContact({
+  companyId,
+  onContactAdded,
+}: {
+  companyId: string;
+  onContactAdded?: () => void;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -20,14 +28,14 @@ export default function NewContact() {
       <DialogTrigger className={buttonVariants({ variant: "default" })}>
         <CirclePlus className="mr-2 h-4 w-4" /> Add new contact
       </DialogTrigger>
-      <DialogContent className="sm: max-w-[625px]">
+      <DialogContent className="sm:max-w-[625px]">
         <DialogHeader>
           <DialogTitle>Add new contact</DialogTitle>
           <DialogDescription>
             Create your contacts to manage them later.
           </DialogDescription>
         </DialogHeader>
-        <p>Form contact</p>
+        <FormContact companyId={companyId} setOpen={setOpen} onSuccess={onContactAdded} />
       </DialogContent>
     </Dialog>
   );

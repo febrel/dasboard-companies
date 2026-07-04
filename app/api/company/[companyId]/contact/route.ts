@@ -1,14 +1,41 @@
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { UTApi } from "uploadthing/server";
 
-export async function DELETE(
+export async function GET(
   _req: Request,
   { params }: { params: Promise<{ companyId: string }> }
 ) {
   try {
     const { userId } = await auth();
+    const { companyId } = await params;
+
+    if (!userId) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const contacts = await db.contact.findMany({
+      where: { companyId },
+      orderBy: { createAt: "desc" },
+    });
+
+    return NextResponse.json(contacts);
+  } catch (error) {
+    console.log("[CONTACT_GET]", error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Unknown error" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(
+  req: Request,
+  { params }: { params: Promise<{ companyId: string }> }
+) {
+  try {
+    const { userId } = await auth();
+    const data = await req.json();
     const { companyId } = await params;
 
     if (!userId) {
@@ -23,49 +50,16 @@ export async function DELETE(
       return new NextResponse("Company not found", { status: 404 });
     }
 
-    if (company.profileImage) {
-      const fileKey = company.profileImage.split("/").pop();
-      if (fileKey) {
-        const utapi = new UTApi();
-        await utapi.deleteFiles(fileKey);
-      }
-    }
-
-    await db.company.delete({
-      where: { id: companyId, userId },
+    const contact = await db.contact.create({
+      data: {
+        companyId,
+        ...data,
+      },
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json(contact);
   } catch (error) {
-    console.log("[COMPANY_DELETE]", error);
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Unknown error" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function PATCH(
-  req: Request,
-  { params }: { params: Promise<{ companyId: string }> }
-) {
-  try {
-    const { userId } = await auth();
-    const data = await req.json();
-    const { companyId } = await params;
-
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
-
-    const company = await db.company.update({
-      where: { id: companyId, userId },
-      data,
-    });
-
-    return NextResponse.json(company);
-  } catch (error) {
-    console.log("[COMPANY_PATCH]", error);
+    console.log("[CONTACT_POST]", error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Unknown error" },
       { status: 500 }
