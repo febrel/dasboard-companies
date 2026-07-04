@@ -87,7 +87,11 @@ export default function FormEvent(props: FormEventProps) {
             <FieldLabel htmlFor="company">Company</FieldLabel>
             <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger id="company">
-                <SelectValue placeholder="Select a company" />
+                <SelectValue placeholder="Select a company">
+                  {(value: string) =>
+                    companies.find((c) => c.id === value)?.name
+                  }
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 {companies.map((company) => (

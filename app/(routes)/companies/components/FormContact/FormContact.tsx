@@ -143,15 +143,12 @@ export default function FormContact({
       </div>
 
       <div className="flex justify-end gap-3">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => setOpen(false)}
-        >
-          Cancel
-        </Button>
         <Button type="submit" disabled={!isValid}>
           Create contact
+        </Button>
+
+        <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+          Cancel
         </Button>
       </div>
     </form>

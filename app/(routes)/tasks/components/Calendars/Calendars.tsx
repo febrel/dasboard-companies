@@ -11,6 +11,8 @@ import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import { DateSelectArg, EventContentArg } from "@fullcalendar/core/index.js";
 
+import axios from "axios";
+
 import { formatDate } from "@/lib/formatDate";
 
 import { CalendarProps } from "./Calendars.types";
@@ -35,8 +37,16 @@ export default function Calendars(props: CalendarProps) {
     setSelectedItem(selected);
   };
 
-  const handleEventClick = () => {
-    console.log("event");
+  const handleEventClick = async (eventId: string, eventTitle: string) => {
+    const confirmed = window.confirm(`Delete task "${eventTitle}"?`);
+    if (!confirmed) return;
+
+    try {
+      await axios.delete(`/api/events/${eventId}`);
+      router.refresh();
+    } catch {
+      console.log("Error deleting event");
+    }
   };
 
   return (
@@ -48,7 +58,7 @@ export default function Calendars(props: CalendarProps) {
             {events.map((currentEvent) => (
               <div
                 key={currentEvent.id}
-                className="p-4 rounded-lg shadow-md mb-2 bg-blue-100 dark:bg-blue-950"
+                className="p-4 rounded-lg shadow-md mb-2 bg-blue-100 dark:bg-black dark:text-white"
               >
                 <p className="font-bold">{currentEvent.title}</p>
                 <p>{formatDate(currentEvent.start)}</p>
@@ -81,7 +91,9 @@ export default function Calendars(props: CalendarProps) {
             selectable={true}
             selectMirror={true}
             select={handleDateClick}
-            eventClick={handleEventClick}
+                eventClick={(arg) =>
+                  handleEventClick(arg.event.id, arg.event.title)
+                }
           />
         </div>
       </div>
@@ -98,8 +110,8 @@ export default function Calendars(props: CalendarProps) {
 
 function renderEventContent(eventInfo: EventContentArg) {
   return (
-    <div className="w-full p-1 bg-slate-200 dark:bg-background">
-      <i>{eventInfo.event.title}</i>
+    <div className="w-full p-1 rounded bg-blue-100 text-blue-900 dark:bg-black dark:text-white text-xs font-medium cursor-pointer">
+      {eventInfo.event.title}
     </div>
   );
 }

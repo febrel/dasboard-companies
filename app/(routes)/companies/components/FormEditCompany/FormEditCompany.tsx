@@ -126,7 +126,18 @@ export default function FormEditCompany({ company }: { company: CompanyData }) {
                   <FieldLabel htmlFor="country">Country</FieldLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger id="country">
-                      <SelectValue />
+                      <SelectValue>
+                        {(value: string) => {
+                          const labels: Record<string, string> = {
+                            spain: "España",
+                            "united-kingdom": "United Kingdom",
+                            portugal: "Portugal",
+                            grecia: "Grecia",
+                            italia: "Italia",
+                          };
+                          return labels[value];
+                        }}
+                      </SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="spain">España</SelectItem>
@@ -216,6 +227,9 @@ export default function FormEditCompany({ company }: { company: CompanyData }) {
                     <UploadButton
                       className="rounded-lg bg-slate-600/20 text-slate-800 outline-dotted outline-3"
                       endpoint="profileImage"
+                      appearance={{
+                        allowedContent: "dark:text-white",
+                      }}
                       onClientUploadComplete={async (res) => {
                         const newUrl = res?.[0].ufsUrl;
                         form.setValue("profileImage", newUrl, {
