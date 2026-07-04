@@ -34,7 +34,7 @@ export default function ButtonDeleteCompany({
     <Button
       size="sm"
       onClick={handleDelete}
-      className="bg-red-300 text-red-950 font-semibold py-2 transition duration-200 hover:bg-red-400"
+      className="bg-red-300 text-red-950 font-semibold py-4 transition duration-200 hover:bg-red-400"
     >
       <Trash2 className="mr-2 size-4" />
       Remove company

@@ -20,13 +20,16 @@ export default async function TaskPage() {
     },
   });
 
+  const companiesIds = companies.map((c) => c.id);
+
   const events = await db.event.findMany({
+    where: {
+      companyId: { in: companiesIds },
+    },
     orderBy: {
       createAt: "desc",
     },
   });
-
-  console.log(events);
 
   return (
     <div>

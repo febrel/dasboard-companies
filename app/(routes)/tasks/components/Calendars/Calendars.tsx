@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import { toast } from "sonner";
-
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -13,11 +11,10 @@ import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import { DateSelectArg, EventContentArg } from "@fullcalendar/core/index.js";
 
-import axios from "axios";
-
 import { formatDate } from "@/lib/formatDate";
 
 import { CalendarProps } from "./Calendars.types";
+import ModalAddEvent from "../ModalAddEvent/ModalAddEvent";
 
 export default function Calendars(props: CalendarProps) {
   const { companies, events } = props;
@@ -25,13 +22,13 @@ export default function Calendars(props: CalendarProps) {
   const [open, setOpen] = useState(false);
   const [onSaveNewEvent, setOnSaveNewEvent] = useState(false);
   const [selectedItem, setSelectedItem] = useState<DateSelectArg>();
-  const [newEvent, setEvent] = useState({
-    eventName: "",
-    companieSelect: {
-      name: "",
-      id: "",
-    },
-  });
+
+  useEffect(() => {
+    if (onSaveNewEvent) {
+      router.refresh();
+      setOnSaveNewEvent(false);
+    }
+  }, [onSaveNewEvent, router]);
 
   const handleDateClick = async (selected: DateSelectArg) => {
     setOpen(true);
@@ -51,7 +48,7 @@ export default function Calendars(props: CalendarProps) {
             {events.map((currentEvent) => (
               <div
                 key={currentEvent.id}
-                className="p-4 rounded-lg shadow-md mb-2 bg-slate-200 dark:bg-black"
+                className="p-4 rounded-lg shadow-md mb-2 bg-blue-100 dark:bg-blue-950"
               >
                 <p className="font-bold">{currentEvent.title}</p>
                 <p>{formatDate(currentEvent.start)}</p>
@@ -88,6 +85,13 @@ export default function Calendars(props: CalendarProps) {
           />
         </div>
       </div>
+      <ModalAddEvent
+        open={open}
+        setOpen={setOpen}
+        setOnSaveNewEvent={setOnSaveNewEvent}
+        companies={companies}
+        selectedDate={selectedItem?.start ?? new Date()}
+      />
     </div>
   );
 }
