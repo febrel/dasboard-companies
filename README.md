@@ -17,7 +17,8 @@
 
 ---
 
-<img width="1901" height="715" alt="image" src="https://github.com/user-attachments/assets/7a8a54ae-b857-45a4-86cd-1f6b0388b801" />
+<img width="1898" height="681" alt="image" src="https://github.com/user-attachments/assets/d22472f7-dd66-4f77-af8c-91f46c76eb17" />
+
 
 
 ## 🛠️ Tech Stack
@@ -33,4 +34,5 @@
 
 ---
 
-<img width="1888" height="776" alt="image" src="https://github.com/user-attachments/assets/262185f6-194f-4489-9343-79c151a7f624" />
+<img width="1891" height="711" alt="image" src="https://github.com/user-attachments/assets/53c884bd-bb4f-4fed-8e1f-c899d98ffbed" />
+
