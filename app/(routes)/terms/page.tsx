@@ -1,21 +1,19 @@
-import React from "react";
-
 export default function PageTermsConditions() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-10 bg-white text-slate-800 antialiased">
-      <header className="border-b border-slate-200 pb-6 mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 tracking-tight mb-2">
+    <div className="max-w-4xl mx-auto px-6 py-10 bg-background text-foreground antialiased">
+      <header className="border-b border-border pb-6 mb-8">
+        <h1 className="text-3xl font-bold tracking-tight mb-2 text-foreground">
           Terms and Conditions
         </h1>
-        <p className="text-sm font-medium text-slate-500">
+        <p className="text-sm font-medium text-muted-foreground">
           Last Updated: July 7, 2026
         </p>
       </header>
 
       <section className="mb-8">
-        <p className="text-base leading-relaxed text-slate-600">
+        <p className="text-base leading-relaxed text-muted-foreground">
           Welcome to{" "}
-          <span className="font-semibold text-slate-900">Manager</span>. These
+          <span className="font-semibold text-foreground">Manager</span>. These
           Terms and Conditions ("Terms") govern your access to and use of our
           corporate management platform (the "Service"). By accessing or using
           the Service, you agree to be bound by these Terms.
@@ -24,18 +22,18 @@ export default function PageTermsConditions() {
 
       <main className="space-y-8">
         <section>
-          <h2 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+          <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
             <span>1.</span> Account Registration and Corporate Use
           </h2>
-          <ul className="space-y-3 pl-5 list-disc text-slate-600 leading-relaxed">
+          <ul className="space-y-3 pl-5 list-disc text-muted-foreground leading-relaxed">
             <li>
-              <strong className="text-slate-800">Company Management:</strong>{" "}
+              <strong className="text-foreground">Company Management:</strong>{" "}
               The Service allows registered users to create, manage, and monitor
               company profiles ("Companies") within their dashboard. You agree
               to provide accurate and updated business information.
             </li>
             <li>
-              <strong className="text-slate-800">
+              <strong className="text-foreground">
                 Security Responsibilities:
               </strong>{" "}
               You are entirely responsible for maintaining the confidentiality
@@ -46,23 +44,23 @@ export default function PageTermsConditions() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+          <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
             <span>2.</span> Calendar and Task Regulation
           </h2>
-          <ul className="space-y-3 pl-5 list-disc text-slate-600 leading-relaxed">
+          <ul className="space-y-3 pl-5 list-disc text-muted-foreground leading-relaxed">
             <li>
-              <strong className="text-slate-800">Task Scheduling:</strong> The
+              <strong className="text-foreground">Task Scheduling:</strong> The
               platform provides a centralized Calendar tool to schedule, assign,
               and regulate corporate tasks, events, and business timelines.
             </li>
             <li>
-              <strong className="text-slate-800">Data Accuracy:</strong> While
+              <strong className="text-foreground">Data Accuracy:</strong> While
               we ensure high availability of our scheduling tools, you are
               responsible for the accuracy of the dates, deadlines, and tasks
               regulated within your calendar workspace.
             </li>
             <li>
-              <strong className="text-slate-800">
+              <strong className="text-foreground">
                 Operational Continuity:
               </strong>{" "}
               We are not liable for business disruptions, missed deadlines, or
@@ -73,18 +71,20 @@ export default function PageTermsConditions() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+          <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
             <span>3.</span> Acceptable Use and Data Ownership
           </h2>
-          <ul className="space-y-3 pl-5 list-disc text-slate-600 leading-relaxed">
+          <ul className="space-y-3 pl-5 list-disc text-muted-foreground leading-relaxed">
             <li>
-              <strong className="text-slate-800">Data Ownership:</strong> You
+              <strong className="text-foreground">Data Ownership:</strong> You
               retain full ownership and intellectual property rights over all
               company profiles, calendar events, and analytical data uploaded to
               the dashboard.
             </li>
             <li>
-              <strong className="text-slate-800">Prohibited Activities:</strong>{" "}
+              <strong className="text-foreground">
+                Prohibited Activities:
+              </strong>{" "}
               You agree not to reverse engineer the platform, attempt to breach
               security protocols, or use the Service to store or transmit
               malicious data.
@@ -93,12 +93,12 @@ export default function PageTermsConditions() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+          <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
             <span>4.</span> Subscription and Plan Upgrades
           </h2>
-          <ul className="space-y-3 pl-5 list-disc text-slate-600 leading-relaxed">
+          <ul className="space-y-3 pl-5 list-disc text-muted-foreground leading-relaxed">
             <li>
-              <strong className="text-slate-800">Features and Limits:</strong>{" "}
+              <strong className="text-foreground">Features and Limits:</strong>{" "}
               Access to extended features—such as adding unlimited companies or
               premium calendar automations—may require a paid subscription. You
               can manage your subscription at any time using the "Upgrade Plan"
