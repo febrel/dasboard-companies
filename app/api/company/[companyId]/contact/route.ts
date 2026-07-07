@@ -2,6 +2,7 @@ import { query, queryOne } from "@/lib/db";
 import type { Company, Contact } from "@/lib/types";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { randomUUID } from "crypto";
 
 export async function GET(
   _req: Request,
@@ -53,10 +54,10 @@ export async function POST(
     }
 
     const contact = await queryOne<Contact>(
-      `INSERT INTO "Contact" ("companyId", name, role, email, phone)
-       VALUES ($1, $2, $3, $4, $5)
+      `INSERT INTO "Contact" (id, "companyId", name, role, email, phone, "createAt", "updateAt")
+       VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW())
        RETURNING *`,
-      [companyId, data.name, data.role, data.email, data.phone]
+      [randomUUID(), companyId, data.name, data.role, data.email, data.phone]
     );
 
     return NextResponse.json(contact);

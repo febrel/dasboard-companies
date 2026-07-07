@@ -2,6 +2,7 @@ import { queryOne } from "@/lib/db";
 import type { Company } from "@/lib/types";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { randomUUID } from "crypto";
 
 export async function POST(req: Request) {
   try {
@@ -13,10 +14,11 @@ export async function POST(req: Request) {
     }
 
     const company = await queryOne<Company>(
-      `INSERT INTO "Company" ("userId", name, description, "profileImage", cif, phone, country, website)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      `INSERT INTO "Company" (id, "userId", name, description, "profileImage", cif, phone, country, website, "createAt", "updateAt")
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW(), NOW())
        RETURNING *`,
       [
+        randomUUID(),
         userId,
         data.name,
         data.description ?? null,

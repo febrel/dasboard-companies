@@ -22,8 +22,7 @@ CREATE TABLE IF NOT EXISTS "Contact" (
   email TEXT NOT NULL,
   phone TEXT NOT NULL,
   "createAt" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  "updateAt" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  CONSTRAINT fk_contact_company FOREIGN KEY ("companyId") REFERENCES "Company"(id) ON DELETE CASCADE
+  "updateAt" TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE INDEX IF NOT EXISTS idx_contact_company_id ON "Contact"("companyId");
@@ -36,11 +35,27 @@ CREATE TABLE IF NOT EXISTS "Event" (
   "allDay" BOOLEAN NOT NULL,
   "timeFormat" TEXT NOT NULL,
   "createAt" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  "updateAt" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  CONSTRAINT fk_event_company FOREIGN KEY ("companyId") REFERENCES "Company"(id)
+  "updateAt" TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE INDEX IF NOT EXISTS idx_event_company_id ON "Event"("companyId");
+
+-- Ensure existing tables (from Prisma) have proper defaults and constraints
+ALTER TABLE "Company" ALTER COLUMN id SET DEFAULT gen_random_uuid();
+ALTER TABLE "Contact" ALTER COLUMN id SET DEFAULT gen_random_uuid();
+ALTER TABLE "Event" ALTER COLUMN id SET DEFAULT gen_random_uuid();
+
+-- Add foreign key constraints if they don't exist (Prisma may have created them differently)
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_contact_company') THEN
+    ALTER TABLE "Contact" ADD CONSTRAINT fk_contact_company FOREIGN KEY ("companyId") REFERENCES "Company"(id) ON DELETE CASCADE;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_event_company') THEN
+    ALTER TABLE "Event" ADD CONSTRAINT fk_event_company FOREIGN KEY ("companyId") REFERENCES "Company"(id);
+  END IF;
+END;
+$$;
 
 CREATE OR REPLACE FUNCTION update_timestamp()
 RETURNS TRIGGER AS $$
