@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📊 Manager – Corporate Dashboard & Company Manager
 
-## Getting Started
+## 📝 Project Description
+**Manager** is a modern, full-stack enterprise dashboard built with Next.js designed to streamline corporate data management. The platform acts as a centralized administrative hub where users can seamlessly monitor key business performance metrics, handle complex company directories, link professional contacts, and schedule critical daily operations. Developed with performance, security, and clean user experience in mind, it provides businesses with the necessary tools to eliminate organizational bottlenecks.
 
-First, run the development server:
+<img width="1887" height="875" alt="image" src="https://github.com/user-attachments/assets/74fb206c-2ccf-4423-8be3-122027d64738" />
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*   **Comprehensive Analytics Dashboard:** Track business growth instantly with key metrics including created company counters, total revenue monitoring, active subscriber metrics, and interactive sales distribution charts.
+*   **Company Directory (Full CRUD):** Create, read, update, and delete detailed company profiles featuring tax identifiers (CIF), active websites, telephone lines, and dynamic corporate logo storage.
+*   **Contact Association System:** Scale your professional network by dynamically adding, organizing, and linking multiple professional contacts directly to specific company profiles.
+*   **Operational Task Calendar:** A fully-featured scheduling workspace driven by `FullCalendar.io` that allows managers to organize corporate tasks, assign timelines, and manage deadlines across day, week, month, or list views.
+*   **Native Theme Customization:** Fully integrated light and dark mode toggles to ensure high interface accessibility and visual comfort.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+<img width="1901" height="715" alt="image" src="https://github.com/user-attachments/assets/7a8a54ae-b857-45a4-86cd-1f6b0388b801" />
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Layer | Technology Used |
+| :--- | :--- |
+| **Framework** | Next.js (App Router) |
+| **Database** | PostgreSQL |
+| **Database Cloud Hosting** | Neon (Serverless Postgres) |
+| **File & Image Storage** | Uploadthing (for dynamic corporate logos) |
+| **UI Components & Styling** | shadcn/ui & Tailwind CSS |
+| **Calendar Engine** | FullCalendar.io |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<img width="1888" height="776" alt="image" src="https://github.com/user-attachments/assets/262185f6-194f-4489-9343-79c151a7f624" />
