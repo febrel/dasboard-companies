@@ -3,31 +3,29 @@ import AccordionFaqs from "./AccordionFaqs/AccordionFaqs";
 export default function PageFaqs() {
   return (
     <div className="max-w-4xl mx-auto bg-background shadow-md rounded-lg p-6">
-      <div className="mb-5">
+      <div className="mb-5 space-y-4 text-muted-foreground">
         <p>
-          Bienvenido a nuestra sección de Preguntas Frecuentes (FAQ) diseñada
-          específicamente para brindarte respuestas rápidas y claras sobre el
-          dashboard para empresas que hemos desarrollado con pasión y
-          dedicación.{" "}
+          Welcome to our Frequently Asked Questions (FAQ) section, specifically
+          designed to provide you with quick and clear answers about the
+          corporate dashboard we have developed with passion and dedication.
         </p>
         <p>
-          En nuestra página de FAQs, encontrarás una recopilación de las
-          preguntas más comunes que nuestros usuarios suelen hacer sobre el
-          funcionamiento, características y uso de nuestro dashboard. Desde cómo
-          registrarte en la plataforma hasta cómo aprovechar al máximo sus
-          funciones, hemos reunido una lista exhaustiva de interrogantes para
-          ofrecerte la mejor experiencia posible.{" "}
+          On this page, you will find a compilation of the most common questions
+          our users ask regarding the dashboard's features, functionality, and
+          usage. From signing up to making the most of its advanced tools, we
+          have gathered an exhaustive list of queries to ensure you have the
+          best possible experience.
         </p>
         <p>
-          Nuestro equipo se ha esforzado por proporcionar respuestas detalladas
-          y fáciles de entender para garantizar que encuentres la información
-          que necesitas de manera rápida y sencilla. Si no encuentras la
-          respuesta que buscas, no dudes en contactarnos. Estamos aqui para
-          ayudarte en cada paso del camino.{" "}
+          Our team has worked hard to provide detailed, easy-to-understand
+          answers so you can find the information you need quickly and
+          effortlessly. If you cannot find the answer you are looking for,
+          please do not hesitate to contact us. We are here to help you every
+          step of the way.
         </p>
         <p>
-          Explora nuestras FAQs y descubre cómo nuestro dashboard puede impulsar
-          la eficiencia y el éxito de tu empresa.{" "}
+          Explore our FAQs and discover how our dashboard can boost your
+          company's efficiency and success.
         </p>
       </div>
 
