@@ -45,7 +45,7 @@ ALTER TABLE "Company" ALTER COLUMN id SET DEFAULT gen_random_uuid();
 ALTER TABLE "Contact" ALTER COLUMN id SET DEFAULT gen_random_uuid();
 ALTER TABLE "Event" ALTER COLUMN id SET DEFAULT gen_random_uuid();
 
--- Add foreign key constraints if they don't exist (Prisma may have created them differently)
+-- Add foreign key constraints if they don't exist
 DO $$
 BEGIN
   IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_contact_company') THEN

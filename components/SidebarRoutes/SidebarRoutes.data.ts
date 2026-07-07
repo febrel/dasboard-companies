@@ -38,13 +38,8 @@ export const dataToolsSidebar = [
 
 export const dataSupportSidebar = [
   {
-    icon: Settings,
-    label: "Setting",
-    href: "/setting",
-  },
-  {
     icon: ShieldCheck,
-    label: "Segurity",
-    href: "/segurity",
+    label: "Terms",
+    href: "/terms",
   },
 ];
