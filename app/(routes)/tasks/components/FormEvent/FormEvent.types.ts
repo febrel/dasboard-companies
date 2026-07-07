@@ -1,4 +1,4 @@
-import { Company } from "@prisma/client";
+import type { Company } from "@/lib/types";
 import { Dispatch, SetStateAction } from "react";
 
 export type FormEventProps = {

@@ -1,4 +1,5 @@
-import { db } from "@/lib/db";
+import { queryOne } from "@/lib/db";
+import type { Company } from "@/lib/types";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import FormEditCompany from "../components/FormEditCompany/FormEditCompany";
@@ -14,9 +15,10 @@ export default async function CompanyIdPage({
 
   if (!userId) redirect("/");
 
-  const company = await db.company.findUnique({
-    where: { id: companyId, userId },
-  });
+  const company = await queryOne<Company>(
+    `SELECT * FROM "Company" WHERE id = $1 AND "userId" = $2`,
+    [companyId, userId]
+  );
 
   if (!company) redirect("/companies");
 

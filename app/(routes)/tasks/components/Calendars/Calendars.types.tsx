@@ -1,4 +1,4 @@
-import { Company, Event } from "@prisma/client";
+import type { Company, Event } from "@/lib/types";
 
 export type CalendarProps = {
   companies: Company[];

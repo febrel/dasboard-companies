@@ -1,4 +1,5 @@
-import { db } from "@/lib/db";
+import { queryOne } from "@/lib/db";
+import type { Company } from "@/lib/types";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { UTApi } from "uploadthing/server";
@@ -15,9 +16,10 @@ export async function DELETE(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const company = await db.company.findUnique({
-      where: { id: companyId, userId },
-    });
+    const company = await queryOne<Company>(
+      `SELECT * FROM "Company" WHERE id = $1 AND "userId" = $2`,
+      [companyId, userId]
+    );
 
     if (!company) {
       return new NextResponse("Company not found", { status: 404 });
@@ -31,9 +33,10 @@ export async function DELETE(
       }
     }
 
-    await db.company.delete({
-      where: { id: companyId, userId },
-    });
+    await queryOne(
+      `DELETE FROM "Company" WHERE id = $1 AND "userId" = $2`,
+      [companyId, userId]
+    );
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -58,10 +61,36 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const company = await db.company.update({
-      where: { id: companyId, userId },
-      data,
-    });
+    const allowedFields = [
+      "name",
+      "description",
+      "profileImage",
+      "cif",
+      "phone",
+      "country",
+      "website",
+    ];
+
+    const setClauses: string[] = [];
+    const values: unknown[] = [];
+    let paramIndex = 1;
+
+    for (const field of allowedFields) {
+      if (data[field] !== undefined) {
+        setClauses.push(`"${field}" = $${paramIndex}`);
+        values.push(data[field]);
+        paramIndex++;
+      }
+    }
+
+    if (setClauses.length === 0) {
+      return new NextResponse("No valid fields to update", { status: 400 });
+    }
+
+    values.push(companyId, userId);
+    const sql = `UPDATE "Company" SET ${setClauses.join(", ")} WHERE id = $${paramIndex} AND "userId" = $${paramIndex + 1} RETURNING *`;
+
+    const company = await queryOne<Company>(sql, values);
 
     return NextResponse.json(company);
   } catch (error) {

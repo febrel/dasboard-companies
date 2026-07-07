@@ -1,4 +1,5 @@
-import { db } from "@/lib/db";
+import { queryOne } from "@/lib/db";
+import type { Company } from "@/lib/types";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
@@ -11,12 +12,21 @@ export async function POST(req: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const company = await db.company.create({
-      data: {
+    const company = await queryOne<Company>(
+      `INSERT INTO "Company" ("userId", name, description, "profileImage", cif, phone, country, website)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+       RETURNING *`,
+      [
         userId,
-        ...data,
-      },
-    });
+        data.name,
+        data.description ?? null,
+        data.profileImage,
+        data.cif,
+        data.phone,
+        data.country,
+        data.website,
+      ]
+    );
 
     return NextResponse.json(company);
   } catch (error) {

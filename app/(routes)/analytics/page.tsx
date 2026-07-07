@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
-import { db } from "@/lib/db";
+import { query } from "@/lib/db";
+import type { Company, Event } from "@/lib/types";
 import CompaniesChart from "./CompaniesChart";
 
 export default async function PageAnalytics() {
@@ -10,25 +11,17 @@ export default async function PageAnalytics() {
     return redirect("/");
   }
 
-  const companies = await db.company.findMany({
-    where: {
-      userId,
-    },
-    orderBy: {
-      createAt: "desc",
-    },
-  });
+  const companies = await query<Company>(
+    `SELECT * FROM "Company" WHERE "userId" = $1 ORDER BY "createAt" DESC`,
+    [userId]
+  );
 
   const companiesIds = companies.map((c) => c.id);
 
-  const events = await db.event.findMany({
-    where: {
-      companyId: { in: companiesIds },
-    },
-    orderBy: {
-      createAt: "desc",
-    },
-  });
+  const events = await query<Event>(
+    `SELECT * FROM "Event" WHERE "companyId" = ANY($1::text[]) ORDER BY "createAt" DESC`,
+    [companiesIds]
+  );
 
   return (
     <div className="p-4 rounded-lg shadow-md bg-background">
